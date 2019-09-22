@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
@@ -19,14 +20,22 @@ public class OrderDetail {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
-        private LocalDateTime orderAt;
+        private String status;
+        private LocalDateTime arrivalDate;
+        private Integer quantity;
+        private BigDecimal totalPrice;
+        private LocalDateTime createdAt;
+        private String createdBy;
+        private LocalDateTime updatedAt;
+        private String updatedBy;
+        private Long orderGroupId;
         //N:1 반드시
         // 객체의 이름을 지정해줘야 한다.
         // 그러면 Hibernate에서 자동으로 user_id를 찾아가게 된다.
-        @ManyToOne
-        private User user;
-        @ManyToOne
-        //private Long itemId;
-        private Item item;
+//        @ManyToOne
+//        private User user;
+//        @ManyToOne
+//        //private Long itemId;
+//        private Item item;
 
 }

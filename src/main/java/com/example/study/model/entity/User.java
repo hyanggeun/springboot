@@ -17,14 +17,18 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; //BIGINT
+    private String password;
+    private String status;
     private String account;
     private String email;
     private String phoneNumber; //JPA에서는 camel 과 snake 타입을 자동으로 변환시켜줘서 변환시킬필요 없다.
+    private String registeredAt;
+    private String unregisteredAt;
     private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
     private String createdBy;
+    private LocalDateTime updatedAt;
     private String updatedBy;
-    //1:N mappedBy에서 설정해준 이름과 같게 설정해야 한다.
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-    private List<OrderDetail> orderDetailList;
+//    //1:N mappedBy에서 설정해준 이름과 같게 설정해야 한다.
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+//    private List<OrderDetail> orderDetailList;
 }
