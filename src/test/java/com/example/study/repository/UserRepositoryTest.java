@@ -1,6 +1,7 @@
 package com.example.study.repository;
 
 import com.example.study.StudyApplicationTests;
+import com.example.study.model.entity.Item;
 import com.example.study.model.entity.User;
 import org.junit.Assert;
 import org.junit.Test;
@@ -26,22 +27,30 @@ public class UserRepositoryTest extends StudyApplicationTests {
         user.setUpdatedAt(LocalDateTime.now());
         User newUser =  userRepository.save(user);
         System.out.println("new User" + newUser);
-    }
-
-    @Test
-    public void read(){
-        //user 테이블에 있는 값을 모두 가져오겠다 findById라는 옵션은 어떤 id를 통해 가져오겠다 라는 함수이다.
-       Optional<User> user =  userRepository.findById(2L);
-       //Optional이라는 옵션은 있을수도 있고 없을 수도 있다는 뜻이다 그래서 if문으로 존재여부를 알아야한다.
-        user.ifPresent(selectUser ->{
-            System.out.println("user :"+selectUser);
-            System.out.println("email:"+selectUser.getEmail());
-        });
-
+        Assert.assertNotNull(newUser);
     }
 
     @Test
     @Transactional
+    public void read(){
+        //user 테이블에 있는 값을 모두 가져오겠다 findById라는 옵션은 어떤 id를 통해 가져오겠다 라는 함수이다.
+//       Optional<User> user =  userRepository.findById(8L);
+       //Optional이라는 옵션은 있을수도 있고 없을 수도 있다는 뜻이다 그래서 if문으로 존재여부를 알아야한다.
+//        user.ifPresent(selectUser ->{
+//            System.out.println("user :"+selectUser);
+//            System.out.println("email:"+selectUser.getEmail());
+//        });
+//        Optional<User> user= userRepository.findById(8L);
+        Optional<User> user = userRepository.findByAccount("TestUser04");
+        user.ifPresent(selectUser-> {
+            selectUser.getOrderDetailList().stream().forEach(detail ->{
+                Item item = detail.getItem();
+                System.out.println(item);
+            });
+        });
+    }
+
+    @Test
     public void update(){
         Optional<User> user = userRepository.findById(2L);
           user.ifPresent(selectUser ->{
