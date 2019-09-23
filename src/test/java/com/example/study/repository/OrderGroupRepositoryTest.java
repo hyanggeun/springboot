@@ -26,7 +26,7 @@ public class OrderGroupRepositoryTest extends StudyApplicationTests {
         Integer totalQuantity = 100;
         LocalDateTime createdAt = LocalDateTime.now();
         String createdBy = "Admin";
-        Long userId = 1L;
+        //Long userId = 1L;
 
         orderGroup.setStatus(status);
         orderGroup.setOrderType(orderType);
@@ -37,7 +37,7 @@ public class OrderGroupRepositoryTest extends StudyApplicationTests {
         orderGroup.setTotalQuantity(totalQuantity);
         orderGroup.setCreatedAt(createdAt);
         orderGroup.setCreatedBy(createdBy);
-        orderGroup.setUserId(userId);
+        //orderGroup.setUserId(userId);
         OrderGroup newOrderGroup = orderGroupRepository.save(orderGroup);
         Assert.assertNotNull(newOrderGroup);
     }

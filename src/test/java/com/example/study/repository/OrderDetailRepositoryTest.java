@@ -64,8 +64,8 @@ public class OrderDetailRepositoryTest extends StudyApplicationTests {
         orderDetail.setTotalPrice(totalPrice2);
         orderDetail.setCreatedAt(createdAt);
         orderDetail.setCreatedBy(createdBy);
-        orderDetail.setOrderGroupId(1L);
-        orderDetail.setItemId(1L);
+//        orderDetail.setOrderGroupId(1L);
+//        orderDetail.setItemId(1L);
         OrderDetail newOrderDetail =  orderDetailRepository.save(orderDetail);
         Assert.assertNotNull(newOrderDetail);
     }

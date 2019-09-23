@@ -11,6 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name="user") //만약 class와 table의 이름이 동일하다면 굳이 선언하지 않아도 된다.
+@ToString(exclude = {"orderGroupList"})
 public class User {
     //@Column(name = "id") 만약 동일하다면 구지 선언해주지 않는다.
     @Id
@@ -27,6 +28,8 @@ public class User {
     private String createdBy;
     private LocalDateTime updatedAt;
     private String updatedBy;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private List<OrderGroup> orderGroupList;
 //    //1:N mappedBy에서 설정해준 이름과 같게 설정해야 한다.
 //    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 //    private List<OrderDetail> orderDetailList;

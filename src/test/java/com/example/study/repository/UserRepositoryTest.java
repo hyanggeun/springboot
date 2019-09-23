@@ -3,6 +3,7 @@ package com.example.study.repository;
 import com.example.study.StudyApplicationTests;
 import com.example.study.model.entity.Item;
 import com.example.study.model.entity.User;
+import org.graalvm.compiler.debug.CSVUtil;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,7 @@ public class UserRepositoryTest extends StudyApplicationTests {
     }
 
     @Test
+    @Transactional
     public void read(){
         String Account = "Test01";
         String password = "Test01";
@@ -52,12 +54,26 @@ public class UserRepositoryTest extends StudyApplicationTests {
         String createdBy = "Admin";
         Optional<User> optionalUser = userRepository.findFirstByPhoneNumber(phoneNumber);
         Assert.assertNotNull(optionalUser);
-        optionalUser.ifPresent(s ->{
-            Assert.assertEquals(s.getAccount(), Account);
-            Assert.assertEquals(s.getCreatedBy(),createdBy);
-            Assert.assertEquals(s.getPassword(),password);
-            System.out.println(s.getAccount()+" "+s.getEmail());
-        });
+        User user = userRepository.findFirstByPhoneNumberOrderByIdDesc(phoneNumber);
+        if(user != null)
+        {
+            user.getOrderGroupList().forEach(orderGroup ->{
+                System.out.println("========주문 묶음===========");
+                System.out.println("수령주소: " + orderGroup.getRevAddress());
+                System.out.println("수령인: "+ orderGroup.getRevName());
+                System.out.println("총 금액: "+orderGroup.getTotalPrice());
+                System.out.println("총 수량: " + orderGroup.getTotalQuantity());
+                System.out.println("=======주문상세 정보=========");
+                orderGroup.getOrderDetailList().forEach(orderDetail -> {
+                    System.out.println("파트너사 이름"+ orderDetail.getItem().getPartner().getName());
+                    System.out.println("파트너사 카테고리"+orderDetail.getItem().getPartner().getCategory().getType());
+                    System.out.println("주문 상품: "+orderDetail.getItem().getName());
+                    System.out.println("고객센터 번호: "+ orderDetail.getItem().getPartner().getCallCenter());
+                    System.out.println("주문 상태: "+orderDetail.getStatus());
+                    System.out.println("도착 예정일자: "+orderDetail.getArrivalDate());
+                });
+            });
+        }
     }
 }
 //    @Test
