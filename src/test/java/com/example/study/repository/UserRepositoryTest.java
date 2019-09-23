@@ -19,14 +19,19 @@ public class UserRepositoryTest extends StudyApplicationTests {
 
     @Test
     public void create() {
-        String Account = "Test01";
-        String password = "Test01";
+        String Account = "Test03";
+        String password = "Test03";
         String status = "REGISTERED";
         String email = "Test@gmail.com";
-        String phoneNumber = "010-111-111";
+        String phoneNumber = "010-111-333";
         LocalDateTime registeredAt = LocalDateTime.now();
         LocalDateTime createdAt = LocalDateTime.now();
         String createdBy = "Admin";
+
+       // User user = new User(Account, password,...); 등
+       //모든 생성자를 선택하려 한다면 Entity에서 모든 변수의 순서를 맞춰줘야 한다.
+        //builder라는 어노테이션을 추가시켜서 생성자 패턴을 만들어준다.
+        //builder라는 함수를 사용하여 build를 해준다.
         User user = new User();
         user.setAccount(Account);
         user.setPassword(password);
@@ -34,8 +39,10 @@ public class UserRepositoryTest extends StudyApplicationTests {
         user.setEmail(email);
         user.setPhoneNumber(phoneNumber);
         user.setRegisteredAt(registeredAt);
-        user.setCreatedAt(createdAt);
-        user.setCreatedBy(createdBy);
+        //원하는 생성자만 생성해줄 수 있다.
+        User u = User.builder().account(Account).password(password).status(status).email(email).build();
+        //user.setCreatedAt(createdAt);
+        //user.setCreatedBy(createdBy);
         User newUser = userRepository.save(user);
         System.out.println("new User" + newUser);
         Assert.assertNotNull(newUser);
