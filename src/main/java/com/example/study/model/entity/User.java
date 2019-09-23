@@ -11,7 +11,6 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name="user") //만약 class와 table의 이름이 동일하다면 굳이 선언하지 않아도 된다.
-
 public class User {
     //@Column(name = "id") 만약 동일하다면 구지 선언해주지 않는다.
     @Id
@@ -22,7 +21,7 @@ public class User {
     private String account;
     private String email;
     private String phoneNumber; //JPA에서는 camel 과 snake 타입을 자동으로 변환시켜줘서 변환시킬필요 없다.
-    private String registeredAt;
+    private LocalDateTime registeredAt;
     private String unregisteredAt;
     private LocalDateTime createdAt;
     private String createdBy;

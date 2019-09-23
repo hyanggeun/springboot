@@ -29,6 +29,6 @@ public class Partner {
     private LocalDateTime updatedAt;
     private String updatedBy;
     private String ceoName;
-    @ManyToOne
-    private Long partner;
+//    @ManyToOne
+//    private Long partner;
 }
