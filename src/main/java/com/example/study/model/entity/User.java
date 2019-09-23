@@ -36,7 +36,7 @@ public class User {
     private String email;
     private String phoneNumber; //JPA에서는 camel 과 snake 타입을 자동으로 변환시켜줘서 변환시킬필요 없다.
     private LocalDateTime registeredAt;
-    private String unregisteredAt;
+    private LocalDateTime unregisteredAt;
     @CreatedDate
     private LocalDateTime createdAt;
     @CreatedBy
