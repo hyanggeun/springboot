@@ -31,7 +31,8 @@ public class Header<T> {
 
     //OK 요청이 왔을떄 Data가 없는 Ok인 것을 처리해주는 메소드
     public static <T> Header<T> Ok(){
-        return (Header<T>) Header.builder()
+        return (Header<T>)Header
+                .builder()
                 .transactionTime(LocalDateTime.now())
                 .resultCode("OK")
                 .description("OK")
@@ -49,6 +50,8 @@ public class Header<T> {
     }
 
     //Error Error의 Ok를 처리해주는 메소드
+    //method Generic type 반환형이나 매개변수 안에 Generic 이 들어간다면 앞에 <T>를 붙여줘야한다.
+
     public static <T> Header<T> Error(String description){
         return (Header<T>) Header.builder()
                 .transactionTime(LocalDateTime.now())
