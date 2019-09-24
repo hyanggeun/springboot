@@ -1,9 +1,6 @@
 package com.example.study.model.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -23,6 +20,7 @@ import java.util.List;
 @ToString(exclude = {"user","orderDetailList"})
 @EntityListeners(AuditingEntityListener.class)
 @Accessors(chain=true)
+@Builder
 public class OrderGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
