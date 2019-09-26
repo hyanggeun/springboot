@@ -58,7 +58,8 @@ public class OrderGroupApiLogicService implements CrudInterface<OrderGroupApiReq
         //2. 데이터 Update하기
         //3. return Response
         return orderGroup.map(select ->{
-            return select.setStatus(orderGroupApiRequest.getStatus())
+            return select
+                    .setStatus(orderGroupApiRequest.getStatus())
                     .setOrderType(orderGroupApiRequest.getOrderType())
                     .setRevAddress(orderGroupApiRequest.getRevAddress())
                     .setRevName(orderGroupApiRequest.getRevName())
